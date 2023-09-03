@@ -10,7 +10,12 @@ class PostMethods {
       "name": space_name,
       "multiple_assignees": true,
       "features": {
-        "due_dates": {"enabled": true, "start_date": false, "remap_due_dates": true, "remap_closed_due_date": false},
+        "due_dates": {
+          "enabled": true,
+          "start_date": false,
+          "remap_due_dates": true,
+          "remap_closed_due_date": false,
+        },
         "time_tracking": {"enabled": false},
         "tags": {"enabled": true},
         "time_estimates": {"enabled": true},
@@ -59,7 +64,12 @@ class PostMethods {
     }
   }
 
-  void commentTask({required String task_id, required String comment, required int assignee, required bool notify_all}) async {
+  void createTaskComment({
+    required String task_id,
+    required String comment,
+    required int assignee,
+    required bool notify_all,
+  }) async {
     late var payload = {"comment_text": comment, "assignee": assignee, "notify_all": notify_all};
     try {
       final response = await dio.post('/task/${task_id}/comment', data: payload);
